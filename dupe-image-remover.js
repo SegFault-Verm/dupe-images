@@ -2,8 +2,6 @@ const Array          = require('./utils/Array');
 const Format         = require('./utils/formatting');
 const File           = require('./utils/File');
 const FileCache      = require('./utils/FileCache');
-const FileExplorer   = require('./utils/FileExplorer');
-const // logger         = require('./utils/// logger');
 const findDuplicates = require('./dupe-image-checker');
 
 var // logger = new // logger('Dupe Remover');
@@ -106,7 +104,7 @@ module.exports = function removeDuplicates(directory, options = {}) {
 			// logger.log(`${removed.length} files removed, ${renamed} files renamed.`);
 			// logger.log(`${Format.bytes(totalBytes)} of disk space freed.`);
 			
-			FileExplorer.goto(directory);
+			//FileExplorer.goto(directory);
 		});
 	})
 	.then(() => {
