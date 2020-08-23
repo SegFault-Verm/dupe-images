@@ -3,10 +3,10 @@ const Format         = require('./utils/formatting');
 const File           = require('./utils/File');
 const FileCache      = require('./utils/FileCache');
 const FileExplorer   = require('./utils/FileExplorer');
-const Logger         = require('./utils/Logger');
+const // logger         = require('./utils/// logger');
 const findDuplicates = require('./dupe-image-checker');
 
-var logger = new Logger('Dupe Remover');
+var // logger = new // logger('Dupe Remover');
 
 function longestName(n1, n2) {
 	return (n1.length > n2.length) ? n1 : n2;
@@ -23,28 +23,28 @@ module.exports = function removeDuplicates(directory, options = {}) {
 	return findDuplicates(directory, options)
 	.then(duplicates => {
 		if (duplicates.length == 0) {
-			logger.ln();
-			logger.red('No duplicates to remove.');
+			// logger.ln();
+			// logger.red('No duplicates to remove.');
 			return;
 		}
 		
 		var startTime = Date.now();
 		var imgHashCache = new FileCache(directory, 'imgcache');
 		
-		logger.ln();
-		logger.log('Determining duplicates to remove...');
-		logger.indent();
+		// logger.ln();
+		// logger.log('Determining duplicates to remove...');
+		// logger.indent();
 		
 		return duplicates.forEachAsync((group,idx) => {
-			logger.log(`Group ${idx+1} (${group.length} images)`);
-			logger.indent();
+			// logger.log(`Group ${idx+1} (${group.length} images)`);
+			// logger.indent();
 			
 			var bestSizeFile = group[0];
 			var bestName = bestSizeFile.name;
 			
-			logger.log('Starting As:', bestName, Format.bytes(bestSizeFile._size));
+			// logger.log('Starting As:', bestName, Format.bytes(bestSizeFile._size));
 			return group.slice(1).forEachAsync(file => {
-				logger.log('Comparing:  ', file.name, Format.bytes(file._size));
+				// logger.log('Comparing:  ', file.name, Format.bytes(file._size));
 				
 				bestName = options.namePreference(file.name, bestName);
 				
@@ -71,20 +71,20 @@ module.exports = function removeDuplicates(directory, options = {}) {
 					// no change
 				}
 				
-				logger.cyan('Best Size:  ', bestSizeFile.name, Format.bytes(bestSizeFile._size));
-				logger.cyan('Best Name:  ', bestName);
+				// logger.cyan('Best Size:  ', bestSizeFile.name, Format.bytes(bestSizeFile._size));
+				// logger.cyan('Best Name:  ', bestName);
 				
 				// remove the inferior file
-				logger.green('Removed:    ', file.name);
+				// logger.green('Removed:    ', file.name);
 				removed.push(file);
 				file.delete();
 				return imgHashCache.delete(file.name);
 			})
 			.then(() => {
-				logger.green('Retained:   ', bestSizeFile.name);
+				// logger.green('Retained:   ', bestSizeFile.name);
 				retained.push(bestSizeFile);
 				if (bestSizeFile.name != bestName && options.rename) {
-					logger.yellow('Renamed As: ', bestName);
+					// logger.yellow('Renamed As: ', bestName);
 					renamed++;
 					var prevName = bestSizeFile.name;
 					bestName = bestSizeFile.rename(bestName);
@@ -92,7 +92,7 @@ module.exports = function removeDuplicates(directory, options = {}) {
 				}
 			})
 			.then(() => {
-				logger.unindent();
+				// logger.unindent();
 			});
 		})
 		.then(() => {
@@ -100,11 +100,11 @@ module.exports = function removeDuplicates(directory, options = {}) {
 			var timeElapsed = endTime - startTime;
 			var totalBytes = removed.reduce((a,f) => a += f._size, 0);
 			
-			logger.unindent();
-			logger.ln();
-			logger.log(`Finished in ${Format.time(timeElapsed)}.`);
-			logger.log(`${removed.length} files removed, ${renamed} files renamed.`);
-			logger.log(`${Format.bytes(totalBytes)} of disk space freed.`);
+			// logger.unindent();
+			// logger.ln();
+			// logger.log(`Finished in ${Format.time(timeElapsed)}.`);
+			// logger.log(`${removed.length} files removed, ${renamed} files renamed.`);
+			// logger.log(`${Format.bytes(totalBytes)} of disk space freed.`);
 			
 			FileExplorer.goto(directory);
 		});
@@ -112,5 +112,5 @@ module.exports = function removeDuplicates(directory, options = {}) {
 	.then(() => {
 		return {retained, removed};
 	})
-	.catch(e => logger.error(e));
+	.catch(e => // logger.error(e));
 };
