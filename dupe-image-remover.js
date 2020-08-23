@@ -1,4 +1,8 @@
 const FileCache      = require('./utils/FileCache');
+const Array          = require('./utils/Array');
+const Format         = require('./utils/formatting');
+const File           = require('./utils/File');
+const FileCache      = require('./utils/FileCache');
 // const FileExplorer   = require('./utils/FileExplorer');
 // const Logger         = require('./utils/Logger');
 const findDuplicates = require('./dupe-image-checker');
