@@ -4,8 +4,6 @@ const File           = require('./utils/File');
 const FileCache      = require('./utils/FileCache');
 const findDuplicates = require('./dupe-image-checker');
 
-var // logger = new // logger('Dupe Remover');
-
 function longestName(n1, n2) {
 	return (n1.length > n2.length) ? n1 : n2;
 }
