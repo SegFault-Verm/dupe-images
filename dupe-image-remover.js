@@ -2,7 +2,11 @@ const Array          = require('./utils/Array');
 const Format         = require('./utils/formatting');
 const File           = require('./utils/File');
 const FileCache      = require('./utils/FileCache');
+// const FileExplorer   = require('./utils/FileExplorer');
+// const Logger         = require('./utils/Logger');
 const findDuplicates = require('./dupe-image-checker');
+
+// var logger = new Logger('Dupe Remover');
 
 function longestName(n1, n2) {
 	return (n1.length > n2.length) ? n1 : n2;
@@ -102,11 +106,11 @@ module.exports = function removeDuplicates(directory, options = {}) {
 			// logger.log(`${removed.length} files removed, ${renamed} files renamed.`);
 			// logger.log(`${Format.bytes(totalBytes)} of disk space freed.`);
 			
-			//FileExplorer.goto(directory);
+			// FileExplorer.goto(directory);
 		});
 	})
 	.then(() => {
 		return {retained, removed};
 	})
-	.catch(e => // logger.error(e));
+	.catch(e => console.log(e));
 };
