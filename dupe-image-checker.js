@@ -1,9 +1,9 @@
 const Jimp      = require('jimp');
 const readAll   = require('./utils/read-all');
 const hex       = require('./utils/hex');
-const Array     = require('./utils/Array');
+const Array     = require('./utils/array');
 const Format    = require('./utils/formatting');
-const File      = require('./utils/File');
+const File      = require('./utils/file');
 const FileCache = require('./utils/FileCache');
 // const Logger    = require('./utils/Logger');
 
