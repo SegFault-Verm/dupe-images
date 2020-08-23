@@ -11,6 +11,10 @@ const FileCache = require('./utils/FileCache');
 
 // hamming distance function (stolen from pHash)
 function distance(h1, h2) {
+	if(!h1.length){
+		console.log("error comparing length")
+		return 1
+	}
 	var sum = 0;
 	for (var i = 0; i < h1.length; i++) {
 		if (h1[i] != h2[i]) {
@@ -217,6 +221,10 @@ module.exports = function findDuplicates(directory, options = {}) {
 		return false;
 	}
 	function sameRatio(i1, i2) {
+		if(!i1.width && !i2.width && !i1.height || !i2.height){
+			console.log("Error comparing ratios")
+			return false
+		}
 		return flcmp(i1.width/i2.width, i1.height/i2.height);
 	}
 };
