@@ -221,7 +221,7 @@ module.exports = function findDuplicates(directory, options = {}) {
 		return false;
 	}
 	function sameRatio(i1, i2) {
-		if(!i1.width && !i2.width && !i1.height || !i2.height){
+		if(!i1.width || !i2.width || !i1.height || !i2.height){
 			console.log("Error comparing ratios")
 			return false
 		}
